@@ -7,7 +7,11 @@ Pre-trained models can be downloaded from: https://www.dropbox.com/sh/2b8vcr0mwd
 Built with python 3.9.2
 ## Installation:
 
-inside the repository: `pip install -e .`
+```bash
+git clone https://github.com/BioroboticsLab/honeybee_cells_segmentation_inference.git
+cd honeybee_cells_segmentation_inference
+pip install -e .
+```
 
 ## Example Inference:
 
