@@ -1,20 +1,20 @@
 from glob import glob
-try:
-    from setuptools import setup, find_packages
-except ImportError:
-    from distutils.core import setup
-
+from setuptools import setup, find_packages
 
 def parse_requirements(filename):
     """load requirements from a pip requirements file"""
     lines = (line.strip() for line in open(filename))
     return [line for line in lines if line and not line.startswith("#")]
 
-
 reqs = parse_requirements("requirements.txt")
 dep_links = [url for url in reqs if "http" in url]
+
+# Add MONAI GitHub install directly to install_requires
+reqs.append("monai @ git+https://github.com/Project-MONAI/MONAI#egg=monai")
+
+# Remove any lines from dep_links that contain MONAI (handled above)
+dep_links = [url for url in dep_links if "Project-MONAI/MONAI" not in url]
 reqs = [req for req in reqs if "http" not in req]
-reqs += [url.split("egg=")[-1] for url in dep_links if "egg=" in url]
 
 setup(
     name="honeybee-comb-inferer",
